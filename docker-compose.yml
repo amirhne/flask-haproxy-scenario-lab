@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  HA_proxy_Loadbalancer:
+    build:
+      context: .
+      dockerfile: ubuntu_with_sshd.Dockerfile
+    image: ubuntu_haproxy:latest
+    hostname: HAproxy
+    ports:
+      - '22:22'
+      - '80:80'
+  
+  flask_server_1:
+    image: ubuntu_haproxy:latest
+    hostname: server_1
+    ports:
+      - '23:22'
+  
+  flask_server_2:
+    image: ubuntu_haproxy:latest
+    hostname: server_2
+    ports:
+      - '24:22'
